@@ -175,9 +175,14 @@ typedef void (^AlternatePopupBlock)(void);
 + (void)closeModal;
 
 /*
+ Returns a shared instance of the Appirater object
+ */
++ (Appirater*)sharedInstance
+
+/*
  Handle Dismissal of Appirater popup
  */
-- (void)didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)didDismissWithButtonIndex:(NSInteger)buttonIndex;
 
 @end
 
