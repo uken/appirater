@@ -85,10 +85,14 @@ extern NSString *const kAppiraterReminderRequestDate;
  */
 #define APPIRATER_RATE_LATER			NSLocalizedStringFromTableInBundle(@"Remind me later", @"AppiraterLocalizable", [Appirater bundle], nil)
 
+typedef void (^AlternatePopupBlock)(void);
+
 @interface Appirater : NSObject <UIAlertViewDelegate, SKStoreProductViewControllerDelegate> {
 
 	UIAlertView		*ratingAlert;
 }
+
+@property(nonatomic, weak) AlternatePopupBlock alternatePopupBlock;
 
 @property(nonatomic, strong) UIAlertView *ratingAlert;
 #if __has_feature(objc_arc_weak)
@@ -169,6 +173,11 @@ extern NSString *const kAppiraterReminderRequestDate;
  Tells Appirater to immediately close any open rating modals (e.g. StoreKit rating VCs).
 */
 + (void)closeModal;
+
+/*
+ Handle Dismissal of Appirater popup
+ */
+- (void)didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 @end
 

@@ -183,6 +183,7 @@ static BOOL _alwaysUseMainBundle = NO;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             appirater = [[Appirater alloc] init];
+            appirater.alternatePopupBlock = nil;
 			appirater.delegate = _delegate;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:
                 UIApplicationWillResignActiveNotification object:nil];
@@ -193,14 +194,19 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 - (void)showRatingAlert {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:APPIRATER_MESSAGE_TITLE
-														 message:APPIRATER_MESSAGE
-														delegate:self
-											   cancelButtonTitle:APPIRATER_CANCEL_BUTTON
-											   otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_RATE_LATER, nil];
-	self.ratingAlert = alertView;
-    [alertView show];
-
+    if (self.alternatePopupBlock) {
+        self.alternatePopupBlock();
+    }
+    else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:APPIRATER_MESSAGE_TITLE
+                                                             message:APPIRATER_MESSAGE
+                                                            delegate:self
+                                                   cancelButtonTitle:APPIRATER_CANCEL_BUTTON
+                                                   otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_RATE_LATER, nil];
+        self.ratingAlert = alertView;
+        [alertView show];
+    }
+    
     id <AppiraterDelegate> delegate = _delegate;
     if (delegate && [delegate respondsToSelector:@selector(appiraterDidDisplayAlert:)]) {
              [delegate appiraterDidDisplayAlert:self];
@@ -508,6 +514,10 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    [self didDismissWithButtonIndex:buttonIndex];
+}
+
+- (void)didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     id <AppiraterDelegate> delegate = _delegate;
