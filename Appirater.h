@@ -177,7 +177,7 @@ typedef void (^AlternatePopupBlock)(void);
 /*
  Returns a shared instance of the Appirater object
  */
-+ (Appirater*)sharedInstance
++ (Appirater*)sharedInstance;
 
 /*
  Handle Dismissal of Appirater popup
