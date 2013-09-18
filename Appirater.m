@@ -491,7 +491,7 @@ static BOOL _alwaysUseMainBundle = NO;
 			[self setModalOpen:YES];
 			//Temporarily use a black status bar to match the StoreKit view.
 			[self setStatusBarStyle:[UIApplication sharedApplication].statusBarStyle];
-			[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent animated:_usesAnimation];
+			[[UIApplication sharedApplication]setStatusBarStyle:setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:_usesAnimation];
 		}];
 	
 	//Use the standard openUrl method if StoreKit is unavailable.

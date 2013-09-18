@@ -92,7 +92,7 @@ typedef void (^AlternatePopupBlock)(void);
 	UIAlertView		*ratingAlert;
 }
 
-@property(nonatomic, weak) AlternatePopupBlock alternatePopupBlock;
+@property(nonatomic, strong) AlternatePopupBlock alternatePopupBlock;
 
 @property(nonatomic, strong) UIAlertView *ratingAlert;
 #if __has_feature(objc_arc_weak)
