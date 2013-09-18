@@ -5,9 +5,9 @@ Pod::Spec.new do |s|
   s.summary               = "A utility that reminds your iPhone app's users to review the app."
   s.homepage              = 'http://arashpayan.com/blog/2009/09/07/presenting-appirater/'
   s.author                = { 'Arash Payan' => 'arash.payan@gmail.com' }
-  s.source                = { :git => 'https://github.com/uken/appirater.git', :tag => s.version.to_s }
+  s.source                = { :git => 'https://github.com/uken/appirater.git', :tag => s.version }
   s.source_files          = '*.{h,m}'
-  s.resource_bundles      = { 'Appirater' => ['*.lproj'] }
+  s.resources             = '*.lproj'
   s.requires_arc          = true
   s.frameworks            = 'CFNetwork', 'SystemConfiguration'
   s.weak_framework        = 'StoreKit'
