@@ -38,6 +38,8 @@
 #import <SystemConfiguration/SCNetworkReachability.h>
 #include <netinet/in.h>
 
+#import "SKPortraitStoreProductViewController.h"
+
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
@@ -476,9 +478,9 @@ static BOOL _alwaysUseMainBundle = NO;
 	[userDefaults synchronize];
 
 	//Use the in-app StoreKit view if available (iOS 6) and imported. This works in the simulator.
-	if (!_openInAppStore && NSStringFromClass([SKStoreProductViewController class]) != nil) {
+	if (!_openInAppStore && NSStringFromClass([SKPortraitStoreProductViewController class]) != nil) {
 
-		SKStoreProductViewController *storeViewController = [[SKStoreProductViewController alloc] init];
+		SKPortraitStoreProductViewController *storeViewController = [[SKPortraitStoreProductViewController alloc] init];
 		NSNumber *appId = [NSNumber numberWithInteger:_appId.integerValue];
 		[storeViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier:appId} completionBlock:nil];
 		storeViewController.delegate = self.sharedInstance;
@@ -491,7 +493,7 @@ static BOOL _alwaysUseMainBundle = NO;
 			[self setModalOpen:YES];
 			//Temporarily use a black status bar to match the StoreKit view.
 			[self setStatusBarStyle:[UIApplication sharedApplication].statusBarStyle];
-			[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:_usesAnimation];
+			[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent animated:_usesAnimation];
 		}];
 
 	//Use the standard openUrl method if StoreKit is unavailable.
